@@ -3,26 +3,26 @@ package firstapp;
 
 public class product {
 
-int id, price, stocks, tep;
+int pid, stks, sold;
     String name;
+    double price;
     
     
-    
-    public void addprod(int pid, String pname, int pr, int st, int teps){
+    public void addprod(int pd, String nm, double pr, int stk, int sd){
         
-        this.id = pid;
-        this.name = pname;
+        this.pid = pd;
+        this.name = nm;
         this.price = pr;
-        this.stocks = st;
-        this.tep = teps;
+        this.stks = stk;
+        this.sold = sd;
         
     }
     
     public void viewprod(){
-        double total = this.price * this.stocks;
-        String stats = (this.stocks == 0) ?"out of stocks" : "Available";
-        System.out.printf("%-10d %-10s %-10d %-10s %-20.2f\n", this.id, this.name,
-                this.price, stats, total);
+        double total = this.price * this.sold;
+        String stats = (this.stks == 0) ?"out of stocks" : "Available";
+        System.out.printf("%-10d %-10s %-10d %-10s %-20.2f\n", this.pid, this.name,
+                this.price, this.stks, this.sold, this.name);
         
     }
 }
