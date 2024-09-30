@@ -1,85 +1,117 @@
-
-package firstapp;
-
-import java.util.Arrays;
-
+package firtapp;
+import java.util.Scanner;
 public class account {
-  
-
-
-
-
-
-    
-    int id;
-    String fname, lname, email, username, pass;
-
-    
-    public void addAccount(int id, String fname, String lname, String email, String username, String password) {
-        this.id = id;
-        this.fname = fname;
-        this.lname = lname;
-        this.email = email;
-        this.username = username;
-        this.pass = password;
-    }
-
-    
-    public void viewAccount() {
-        System.out.printf("%-10d %-10s %-10s %-20s %-13s %-10s\n",
-            this.id, this.fname, this.lname, this.email, this.username, this.pass);
-    }
-
-   
-    public boolean passwordVerify(String password) {
-        char element;
-        int digit = 0, upperCase = 0;
-        String[] commonPasswords = {"admin", "1234", "password"};
-
+      
+      Scanner s = new Scanner(System.in);
+      account[] acc = new account[100];
        
-        if (password.length() < 8){
-            System.out.println("Password must have at least 8 characters.");
-            return false;
-        }
+        int no, i, id;
 
-       
-        if (Arrays.asList(commonPasswords).contains(password)) {
-            System.out.println("Password is too common.");
-            return false;
-        }
+        System.out.print("Enter number of Accounts: ");
+        no = s.nextInt();
 
-        
-        for (int x = 0; x < password.length(); x++) {
-            element = password.charAt(x);
-            if (Character.isDigit(element)) {
-                digit++;
-            } else if (Character.isUpperCase(element)) {
-                upperCase++;
+        for (i = 0; i < no; i++) {
+            acc[i] = new account();
+         
+            boolean identi;
+            boolean email1;
+            boolean username;
+           
+            System.out.println("Enter account Details " + (i + 1) + ": ");
+            while (true) {
+                System.out.print("Enter ID: ");
+                id = s.nextInt();
+                identi = false;
+
+               
+                for (int x = 0; x < i; x++) {
+                    if (acc[x] != null && acc[x].id == id) {
+                        identi = true;
+                        break;
+                    }
+                }
+
+                if (identi) {
+                    System.out.println(" - ID already exists. Try again -");
+                } else {
+                   
+                    acc[i].id = id;
+                    break;
+                }
             }
-        }
+           
+            System.out.print("First Name: ");
+            String fname = s.next();
+            System.out.print("Last Name: ");
+            String lname = s.next();
+           
+             while (true) {
+                System.out.print("Email: ");
+                String email = s.next();
+                email1 = false;
 
-        if (upperCase == 0) {
-            System.out.println("Password must contain at least one uppercase letter.");
-            return false;
-        }
+               
+                for (int x = 0; x < i; x++) {
+                    if (acc[x] != null && acc[x].email.equals(email)) {
+                        email1 = true;
+                        break;
+                    }
+                }
 
-        if (digit == 0) {
-            System.out.println("Password must contain at least one number.");
-            return false;
-        }
+                if (email1) {
+                    System.out.println(" - Email already exists. Try again -");
+                } else {
+                   
+                    acc[i].email = email;
+                    break;
+                }
+            }
+           
+             while (true) {
+                System.out.print("Username: ");
+                String user = s.next();
+                username = false;
 
+               
+                for (int x = 0; x < i; x++) {
+                    if (acc[x] != null && acc[x].username.equals(user)) {
+                        username = true;
+                        break;
+                    }
+                }
+
+                if (username) {
+                    System.out.println(" - Username already exists. Try again -");
+                } else {
+                   
+                    acc[i].username = user;
+                    break;
+                }
+            }
+           
+            boolean passValid = false;
+           
+            while (!passValid) {
+                System.out.print("Password: ");
+                String password = s.next();
+
+                if (acc[i].passwordVerify(password)) {
+                    acc[i].addAccount(acc[i].id, fname, lname, acc[i].email, acc[i].username, password);
+                    passValid = true;  
+                } else {
+                    System.out.println(" - Invalid password - , Try Again ");
+                }
+            }
+            System.out.println("");
        
-        if (password.matches("[a-zA-Z0-9]+")) {
-            System.out.println("Password must contain at least one special character.");
-            return false;
-        }
-
-        return true;
-    }
-
 
         }
-
-
-    
-
+        System.out.println("Account Details: ");
+         System.out.printf("%-10s %-10s %-10s %-20s %-13s %-10s\n","ID", "FirstName", "LastName", "Email", "Username", "Password");
+         System.out.println("---------------------------------------------------------------------------------");
+        for (i = 0; i < no; i++) {
+            if(acc[i] != null){
+            acc[i].viewAccount();
+            System.out.println("");*/
+        }
+}
